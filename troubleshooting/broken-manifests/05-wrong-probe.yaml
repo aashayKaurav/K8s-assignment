@@ -1,0 +1,49 @@
+# Exercise 5: The pod starts but keeps getting restarted — can you find the issue?
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-broken-5
+  namespace: k8s-assignment
+  labels:
+    app: backend-broken-5
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend-broken-5
+  template:
+    metadata:
+      labels:
+        app: backend-broken-5
+    spec:
+      containers:
+        - name: backend
+          image: k8s-backend:1.0
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 5000
+          envFrom:
+            - configMapRef:
+                name: app-config
+            - secretRef:
+                name: db-secret
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: 500m
+              memory: 256Mi
+          livenessProbe:
+            httpGet:
+              path: /api/healthx
+              port: 5000
+            initialDelaySeconds: 5
+            periodSeconds: 5
+            failureThreshold: 3
+          readinessProbe:
+            httpGet:
+              path: /api/ready
+              port: 5000
+            initialDelaySeconds: 5
+            periodSeconds: 5

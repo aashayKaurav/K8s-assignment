@@ -1,0 +1,190 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: #f0f2f5;
+    color: #333;
+    line-height: 1.6;
+}
+
+header {
+    background: #1a73e8;
+    color: white;
+    padding: 1rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+header h1 {
+    font-size: 1.5rem;
+}
+
+.badge {
+    padding: 0.25rem 0.75rem;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.badge-healthy {
+    background: #34a853;
+    color: white;
+}
+
+.badge-unhealthy {
+    background: #ea4335;
+    color: white;
+}
+
+.badge-unknown {
+    background: #9e9e9e;
+    color: white;
+}
+
+main {
+    max-width: 900px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+.card {
+    background: white;
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+}
+
+.card h2 {
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+    color: #202124;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.25rem;
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 0.5rem 0.75rem;
+    border: 1px solid #dadce0;
+    border-radius: 4px;
+    font-size: 0.95rem;
+    font-family: inherit;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #1a73e8;
+    box-shadow: 0 0 0 2px rgba(26, 115, 232, 0.2);
+}
+
+.btn {
+    padding: 0.5rem 1.25rem;
+    border: none;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.btn-primary {
+    background: #1a73e8;
+    color: white;
+}
+
+.btn-primary:hover {
+    background: #1557b0;
+}
+
+.btn-danger {
+    background: #ea4335;
+    color: white;
+    padding: 0.25rem 0.75rem;
+    font-size: 0.8rem;
+}
+
+.btn-danger:hover {
+    background: #c5221f;
+}
+
+.message {
+    margin-top: 0.75rem;
+    padding: 0.5rem 0.75rem;
+    border-radius: 4px;
+    font-size: 0.9rem;
+}
+
+.message-success {
+    background: #e6f4ea;
+    color: #137333;
+}
+
+.message-error {
+    background: #fce8e6;
+    color: #c5221f;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+thead th {
+    text-align: left;
+    padding: 0.75rem;
+    border-bottom: 2px solid #e0e0e0;
+    font-size: 0.85rem;
+    color: #5f6368;
+    text-transform: uppercase;
+}
+
+tbody td {
+    padding: 0.75rem;
+    border-bottom: 1px solid #f0f0f0;
+    font-size: 0.9rem;
+}
+
+tbody tr:hover {
+    background: #f8f9fa;
+}
+
+.loading {
+    text-align: center;
+    padding: 2rem;
+    color: #5f6368;
+}
+
+.empty-state {
+    text-align: center;
+    padding: 2rem;
+    color: #9e9e9e;
+}
+
+.count {
+    font-size: 0.85rem;
+    color: #5f6368;
+    font-weight: normal;
+}
+
+footer {
+    text-align: center;
+    padding: 1.5rem;
+    color: #9e9e9e;
+    font-size: 0.85rem;
+}

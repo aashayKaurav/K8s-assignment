@@ -1,0 +1,29 @@
+# Exercise 1: Something is wrong with this deployment — can you find it?
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-broken-1
+  namespace: k8s-assignment
+  labels:
+    app: backend-broken-1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend-broken-1
+  template:
+    metadata:
+      labels:
+        app: backend-broken-1
+    spec:
+      containers:
+        - name: backend
+          image: k8s-backend:99.99
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 5000
+          envFrom:
+            - configMapRef:
+                name: app-config
+            - secretRef:
+                name: db-secret

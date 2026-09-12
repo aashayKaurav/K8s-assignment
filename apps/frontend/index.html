@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>K8s Assignment - Item Manager</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <header>
+        <h1>Item Manager</h1>
+        <span id="health-badge" class="badge badge-unknown">Checking...</span>
+    </header>
+
+    <main>
+        <section class="card">
+            <h2>Add New Item</h2>
+            <form id="item-form">
+                <div class="form-group">
+                    <label for="name">Name *</label>
+                    <input type="text" id="name" name="name" required placeholder="Enter item name">
+                </div>
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <textarea id="description" name="description" rows="3" placeholder="Enter description"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Add Item</button>
+            </form>
+            <div id="form-message" class="message" hidden></div>
+        </section>
+
+        <section class="card">
+            <h2>Items <span id="item-count" class="count"></span></h2>
+            <div id="loading" class="loading">Loading items...</div>
+            <table id="items-table" hidden>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Created</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="items-body"></tbody>
+            </table>
+            <p id="no-items" hidden class="empty-state">No items yet. Add one above!</p>
+        </section>
+    </main>
+
+    <footer>
+        <p>K8s Learning Assignment &mdash; Running on Kubernetes</p>
+    </footer>
+
+    <script src="/app.js"></script>
+</body>
+</html>

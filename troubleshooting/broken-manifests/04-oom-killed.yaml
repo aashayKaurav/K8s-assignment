@@ -1,0 +1,36 @@
+# Exercise 4: This pod keeps crashing — can you find out why?
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-broken-4
+  namespace: k8s-assignment
+  labels:
+    app: backend-broken-4
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend-broken-4
+  template:
+    metadata:
+      labels:
+        app: backend-broken-4
+    spec:
+      containers:
+        - name: backend
+          image: k8s-backend:1.0
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 5000
+          envFrom:
+            - configMapRef:
+                name: app-config
+            - secretRef:
+                name: db-secret
+          resources:
+            requests:
+              cpu: 100m
+              memory: 16Mi
+            limits:
+              cpu: 500m
+              memory: 16Mi

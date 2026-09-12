@@ -1,0 +1,42 @@
+# Exercise 3: The deployment works, but the service has an issue — can you find it?
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-broken-3
+  namespace: k8s-assignment
+  labels:
+    app: backend-broken-3
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend-broken-3
+  template:
+    metadata:
+      labels:
+        app: backend-broken-3
+    spec:
+      containers:
+        - name: backend
+          image: k8s-backend:1.0
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 5000
+          envFrom:
+            - configMapRef:
+                name: app-config
+            - secretRef:
+                name: db-secret
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend-broken-3
+  namespace: k8s-assignment
+spec:
+  type: ClusterIP
+  selector:
+    app: backend-broken-3
+  ports:
+    - port: 80
+      targetPort: 8080
