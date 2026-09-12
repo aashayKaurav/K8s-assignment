@@ -21,6 +21,8 @@ kubectl apply -f "$K8S_DIR/config/secret.yaml"
 # Step 3: PV + PVC
 echo ""
 echo "[3/8] Creating PersistentVolume and PersistentVolumeClaim..."
+echo "     Creating hostPath directory on database node..."
+minikube ssh -p k8s-assignment -n k8s-assignment-m03 "sudo mkdir -p /mnt/data/postgres"
 kubectl apply -f "$K8S_DIR/database/pv.yaml"
 kubectl apply -f "$K8S_DIR/database/pvc.yaml"
 
