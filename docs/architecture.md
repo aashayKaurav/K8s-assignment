@@ -1,23 +1,25 @@
 # Architecture
 
+**Interactive Diagram:** [Open in Excalidraw](https://excalidraw.com/#json=b0qvV7d6oi7hvJ4MKX_84,a7iQdi4HmbrjfgCPv1a3oA)
+
 ## System Overview
 
 This is a 3-tier application running on a 3-node Minikube Kubernetes cluster.
 
 ```
-┌─── minikube (control-plane) ──────────────────────────────────────────────┐
+┌─── k8s-assignment (control-plane) ──────────────────────────────────────────────┐
 │  K8s API Server, etcd, scheduler, controller-manager                      │
 │  Also runs workload pods (no NoSchedule taint on control plane)          │
 └──────────────────────────────────────────────────────────────────────────┘
 
-┌─── minikube-m02 (worker) ────────────────────────────────────────────────┐
+┌─── k8s-assignment-m02 (worker) ────────────────────────────────────────────────┐
 │  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐ │
 │  │ frontend-xxx │  │ frontend-yyy │  │ backend-xxx  │  │ backend-yyy  │ │
 │  │  (nginx:80)  │  │  (nginx:80)  │  │ (flask:5000) │  │ (flask:5000) │ │
 │  └──────────────┘  └──────────────┘  └──────────────┘  └──────────────┘ │
 └──────────────────────────────────────────────────────────────────────────┘
 
-┌─── minikube-m03 (worker, tainted: dedicated=database:NoSchedule) ────────┐
+┌─── k8s-assignment-m03 (worker, tainted: dedicated=database:NoSchedule) ────────┐
 │  Label: node-role=database                                                │
 │  ┌────────────────────────────────────────┐                              │
 │  │  postgres-xxx                          │                              │
@@ -74,7 +76,7 @@ User Browser
 - **Image:** `postgres:16-alpine` (from Docker Hub)
 - **Replicas:** 1 (Recreate strategy — no dual-write risk)
 - **Probes:** `pg_isready` exec command
-- **Storage:** 1Gi PersistentVolume (hostPath on minikube-m03)
+- **Storage:** 1Gi PersistentVolume (hostPath on k8s-assignment-m03)
 - **Scheduling:**
   - **Toleration:** Allows scheduling on tainted node (`dedicated=database:NoSchedule`)
   - **Node Affinity:** Required on nodes with `node-role=database` label

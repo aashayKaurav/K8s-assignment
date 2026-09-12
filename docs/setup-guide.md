@@ -26,9 +26,9 @@ minikube start --nodes=3 --driver=docker --cpus=2 --memory=4096 --profile=k8s-as
 
 **What this does:**
 - Creates 3 Docker containers acting as K8s nodes
-- `minikube` — control-plane node (also runs workloads by default)
-- `minikube-m02` — worker node for FE/BE pods
-- `minikube-m03` — worker node (will be dedicated to database)
+- `k8s-assignment` — control-plane node (also runs workloads by default)
+- `k8s-assignment-m02` — worker node for FE/BE pods
+- `k8s-assignment-m03` — worker node (will be dedicated to database)
 
 Verify:
 ```bash
@@ -41,21 +41,21 @@ kubectl get nodes
 Labels are key-value metadata on nodes. We use them with Node Affinity to control pod scheduling.
 
 ```bash
-kubectl label nodes minikube-m03 node-role=database
+kubectl label nodes k8s-assignment-m03 node-role=database
 ```
 
 ### Taints
 Taints prevent pods from scheduling on a node unless they have a matching toleration.
 
 ```bash
-kubectl taint nodes minikube-m03 dedicated=database:NoSchedule
+kubectl taint nodes k8s-assignment-m03 dedicated=database:NoSchedule
 ```
 
 This means: "Only pods that tolerate `dedicated=database:NoSchedule` can run here."
 
 Verify:
 ```bash
-kubectl describe node minikube-m03 | grep -A5 "Taints\|Labels"
+kubectl describe node k8s-assignment-m03 | grep -A5 "Taints\|Labels"
 ```
 
 ## 4. Enable Addons
@@ -135,7 +135,7 @@ kubectl rollout status deployment/postgres -n k8s-assignment
 
 Verify:
 ```bash
-kubectl get pods -n k8s-assignment -o wide   # Should be on minikube-m03
+kubectl get pods -n k8s-assignment -o wide   # Should be on k8s-assignment-m03
 ```
 
 ### 6.5 Backend
@@ -204,7 +204,7 @@ kubectl get ingress -n k8s-assignment
 kubectl get pods -n k8s-assignment -o wide | grep postgres
 
 # Node taint is present
-kubectl describe node minikube-m03 | grep Taint
+kubectl describe node k8s-assignment-m03 | grep Taint
 ```
 
 ## 9. Test HPA Scaling
