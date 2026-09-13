@@ -2,6 +2,8 @@
 
 A complete 3-tier application (Frontend + Backend + PostgreSQL) deployed on a local Kubernetes cluster (Minikube) to learn core K8s concepts.
 
+> **New to this?** See the [Complete Ubuntu Guide](docs/ubuntu-complete-guide.md) for a step-by-step walkthrough covering installation, setup, all K8s experiments, and troubleshooting exercises.
+
 ## K8s Concepts Covered
 
 | Concept | Where Used |
